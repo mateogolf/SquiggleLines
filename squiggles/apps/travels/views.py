@@ -9,25 +9,29 @@ from ..main.models import User
 def index(request):
     #Find name of user with
     user = User.objects.get(id=request.session['id'])
-    context = {'name': user.name}
+    context = {
+        'name': user.name,
+        'schedule': user.schedule.all(),
+        'other_trips': Trip.objects.exclude(users=user)
+    }
     # #Get all user's schedule
-    if 'schedule' not in request.session:
-        request.session['schedule'] = []
+    # if 'schedule' not in request.session:
+    #     request.session['schedule'] = []
 
-    schedule = user.schedule.all()
-    # users = trip.users.exclude(id=trip.planner.id)
-    for trip in schedule:
-        request.session['schedule'].append(trip)
+    # schedule = user.schedule.all()
+    # # users = trip.users.exclude(id=trip.planner.id)
+    # for trip in schedule:
+    #     request.session['schedule'].append(trip)
 
-    #Get all other schedules
-    if 'other_trips' not in request.session:
-        request.session['other_trips'] = []
-    # trips = Trip.objects.all()
-    # print trips
-    # trips = User.objects.all().schedule.trips.exclude(user_id=request.session['id'])
-    trips = Trip.objects.exclude(users=user)
-    for other in trips:
-        request.session['other_trips'].append(other)
+    # #Get all other schedules
+    # if 'other_trips' not in request.session:
+    #     request.session['other_trips'] = []
+    # # trips = Trip.objects.all()
+    # # print trips
+    # # trips = User.objects.all().schedule.trips.exclude(user_id=request.session['id'])
+    # trips = Trip.objects.exclude(users=user)
+    # for other in trips:
+    #     request.session['other_trips'].append(other)
 
     return render(request, 'travels/index.html', context)
 

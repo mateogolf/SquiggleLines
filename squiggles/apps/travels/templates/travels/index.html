@@ -25,7 +25,7 @@
             </tr>
         </thead>
         <tbody>
-            {%for trip in request.session.schedule%}
+            {%for trip in schedule%}
             <tr>
                 <td><a href="/travels/destination/{{trip.id}}">{{trip.destination}}</a></td>
                 <td>{{trip.start_date}}</td>
@@ -47,7 +47,7 @@
             </tr>
         </thead>
         <tbody>
-            {%for other in request.session.other_trips%}
+            {%for other in other_trips%}
             <tr>
                 <td>{{other.planner.name}}</td>
                 <td><a href="/travels/destination/{{other.id}}">{{other.destination}}</a></td>
