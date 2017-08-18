@@ -1,0 +1,2 @@
+# SquiggleLines
+Django Project
